@@ -16,23 +16,141 @@
             height: 100%;
 
             background-color: #000000;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            width: 500px;
+
+            margin: 50px auto;
+        }
+
+        #inputBox,
+        #outputBox {
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 12px;
+
+            font-size: 20px;
+
+            border: 2px solid #555555;
+            border-radius: 8px;
+
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        #inputBox {
+            height: 50px;
+        }
+
+        #outputBox {
+            height: 150px;
+
+            resize: none;
+
+            cursor: text;
+        }
+
+        #outputBox:focus {
+            outline: none;
         }
     </style>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <input
+            type="text"
+            id="inputBox"
+            placeholder="Type something..."
+        >
+
+        <textarea
+            id="outputBox"
+            readonly
+            placeholder="Small caps will appear here..."
+        ></textarea>
+
+    </div>
+
 
     <script>
-        // 1. Create the input element
-        const textBox = document.createElement("input");
-        
-        // 2. Configure it as a text box
-        textBox.type = "text";
-        textBox.id = "myTextBox";
-        textBox.placeholder = "Enter text here...";
-        
-        // 3. Append it to the body or a specific container
-        document.body.appendChild(textBox);
+
+        const inputBox =
+            document.getElementById("inputBox");
+
+        const outputBox =
+            document.getElementById("outputBox");
+
+
+        function smallCaps(text) {
+
+            const smallCaps = {
+                A: "ᴀ",
+                B: "ʙ",
+                C: "ᴄ",
+                D: "ᴅ",
+                E: "ᴇ",
+                F: "ꜰ",
+                G: "ɢ",
+                H: "ʜ",
+                I: "ɪ",
+                J: "ᴊ",
+                K: "ᴋ",
+                L: "ʟ",
+                M: "ᴍ",
+                N: "ɴ",
+                O: "ᴏ",
+                P: "ᴘ",
+                Q: "ǫ",
+                R: "ʀ",
+                S: "s",
+                T: "ᴛ",
+                U: "ᴜ",
+                V: "ᴠ",
+                W: "ᴡ",
+                X: "x",
+                Y: "ʏ",
+                Z: "ᴢ"
+            };
+
+
+            return text
+                .split("")
+                .map(function(character) {
+
+                    const upper =
+                        character.toUpperCase();
+
+                    if (smallCaps[upper]) {
+                        return smallCaps[upper];
+                    }
+
+                    return character;
+
+                })
+                .join("");
+        }
+
+
+        inputBox.addEventListener(
+            "input",
+            function() {
+
+                outputBox.value =
+                    smallCaps(inputBox.value);
+
+            }
+        );
 
     </script>
-</head>
+
+</body>
+</html>
