@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <title>Small Text Converter | UtilitEase</title>
+
+    <style>
+
+        /* ========================================
+           GENERAL PAGE
+           ======================================== */
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+
+            width: 100%;
+            min-height: 100%;
+
+            background-color: #101010;
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
+        }
+
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        #header {
+            text-align: center;
+
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        #logo {
+            width: 100px;
+            height: 100px;
+
+            object-fit: contain;
+        }
+
+        #title {
+            margin-top: 10px;
+            margin-bottom: 25px;
+
+            font-size: 32px;
+        }
+
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+
+        #navigation {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 50px;
+
+            padding-bottom: 20px;
+        }
+
+        .navButton {
+            background: none;
+            border: none;
+
+            color: #ffffff;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: color 0.2s ease;
+        }
+
+        .navButton:hover {
+            color: #00ff00;
+        }
+
+
+        /* ========================================
+           SEPARATOR
+           ======================================== */
+
+        #topLine {
+            width: 100%;
+            height: 1px;
+
+            background-color: #444444;
+        }
+
+
+        /* ========================================
+           MAIN CONTENT
+           ======================================== */
+
+        #main {
+            min-height: 550px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* ========================================
+           CONVERTER
+           ======================================== */
+
+        #container {
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+
+            width: 600px;
+        }
+
+        #inputBox,
+        #outputBox {
+            width: 100%;
+            box-sizing: border-box;
+
+            padding: 12px;
+
+            font-size: 20px;
+            font-family: Arial, sans-serif;
+
+            border: 2px solid #555555;
+            border-radius: 8px;
+
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        #inputBox {
+            height: 50px;
+        }
+
+        #outputBox {
+            height: 150px;
+
+            resize: none;
+
+            cursor: text;
+        }
+
+        #outputBox:focus {
+            outline: none;
+        }
+
+
+        /* ========================================
+           COPY BUTTON
+           ======================================== */
+
+        #copyButton {
+            width: 600px;
+
+            box-sizing: border-box;
+
+            padding: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            background-color: #666666;
+            color: #ffffff;
+
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        /* Empty / inactive state */
+
+        #copyButton.inactive {
+            background-color: #444444;
+            color: #aaaaaa;
+            opacity: 0.75;
+        }
+
+        /* Has text / active state */
+
+        #copyButton.active {
+            background-color: #ffffff;
+            color: #000000;
+            opacity: 1;
+        }
+
+
+        /* ========================================
+           BOTTOM LINE
+           ======================================== */
+
+        #bottomLine {
+            width: 100%;
+            height: 1px;
+
+            background-color: #444444;
+        }
+
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        #footer {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 20px 30px;
+
+            background-color: #151515;
+        }
+
+        #discordButton {
+            padding: 8px 14px;
+
+            border: none;
+            border-radius: 6px;
+
+            background-color: #5865F2;
+            color: #ffffff;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        #minecraftText {
+            font-size: 16px;
+        }
+
+        #minecraftIP {
+            color: #00ff00;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header id="header">
+
+        <img
+            id="logo"
+            src="logo.png"
+            alt="Logo"
+        >
+
+        <h1 id="title">
+            Small Text Converter
+        </h1>
+
+
+        <!-- NAVIGATION -->
+
+        <nav id="navigation">
+
+            <button class="navButton">
+                Small Text Converter
+            </button>
+
+            <button class="navButton">
+                Unicodes
+            </button>
+
+            <button class="navButton">
+                Timestamp Converter
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <div id="topLine"></div>
+
+
+    <!-- ========================================
+         MAIN CONTENT
+         ======================================== -->
+
+    <main id="main">
+
+        <div id="container">
+
+            <input
+                type="text"
+                id="inputBox"
+                placeholder="Type something..."
+            >
+
+            <textarea
+                id="outputBox"
+                readonly
+                placeholder="Small caps will appear here..."
+            ></textarea>
+
+            <button
+                id="copyButton"
+                class="inactive"
+            >
+                COPY
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <div id="bottomLine"></div>
+
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer id="footer">
+
+        <button id="discordButton">
+            Discord
+        </button>
+
+        <div id="minecraftText">
+
+            Our Minecraft Server — SellMC!
+
+            <span id="minecraftIP">
+                <br>
+                sᴇʟʟᴍᴄ.ᴍɪɴᴇʜᴜᴛ.ɢɢ
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+
+    <script>
+
+        const inputBox =
+            document.getElementById("inputBox");
+
+        const outputBox =
+            document.getElementById("outputBox");
+
+        const copyButton =
+            document.getElementById("copyButton");
+
+
+        /* ========================================
+           SMALL CAPS
+           ======================================== */
+
+        function smallCaps(text) {
+
+            const smallCaps = {
+                A: "ᴀ",
+                B: "ʙ",
+                C: "ᴄ",
+                D: "ᴅ",
+                E: "ᴇ",
+                F: "ꜰ",
+                G: "ɢ",
+                H: "ʜ",
+                I: "ɪ",
+                J: "ᴊ",
+                K: "ᴋ",
+                L: "ʟ",
+                M: "ᴍ",
+                N: "ɴ",
+                O: "ᴏ",
+                P: "ᴘ",
+                Q: "ǫ",
+                R: "ʀ",
+                S: "s",
+                T: "ᴛ",
+                U: "ᴜ",
+                V: "ᴠ",
+                W: "ᴡ",
+                X: "x",
+                Y: "ʏ",
+                Z: "ᴢ"
+            };
+
+
+            return text
+                .split("")
+                .map(function(character) {
+
+                    const upper =
+                        character.toUpperCase();
+
+                    if (smallCaps[upper]) {
+
+                        return smallCaps[upper];
+
+                    }
+
+                    return character;
+
+                })
+                .join("");
+        }
+
+
+        /* ========================================
+           LIVE CONVERSION
+           ======================================== */
+
+        inputBox.addEventListener(
+            "input",
+            function() {
+
+                outputBox.value =
+                    smallCaps(
+                        inputBox.value
+                    );
+
+
+                /*
+                 * Change the COPY button
+                 * depending on whether there
+                 * is text in the input.
+                 */
+
+                if (inputBox.value.length > 0) {
+
+                    copyButton.classList.remove(
+                        "inactive"
+                    );
+
+                    copyButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    copyButton.classList.remove(
+                        "active"
+                    );
+
+                    copyButton.classList.add(
+                        "inactive"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           COPY
+           ======================================== */
+
+        const delay =
+            ms =>
+            new Promise(
+                resolve =>
+                setTimeout(resolve, ms)
+            );
+
+
+        copyButton.addEventListener(
+            "click",
+            async function() {
+
+                /*
+                 * Don't copy anything if
+                 * the input is empty.
+                 */
+
+                if (outputBox.value.length === 0) {
+                    return;
+                }
+
+
+                await navigator.clipboard.writeText(
+                    outputBox.value
+                );
+
+
+                console.log(
+                    "Copied text to user's clipboard"
+                );
+
+
+                copyButton.textContent =
+                    "COPIED!";
+
+
+                await delay(1000);
+
+
+                copyButton.textContent =
+                    "COPY";
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
+</body>
+</html>
