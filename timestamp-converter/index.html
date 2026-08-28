@@ -363,6 +363,7 @@
 
     <script>
 
+        
         const inputBox =
             document.getElementById("inputBox");
 
@@ -371,6 +372,12 @@
 
         const copyButton =
             document.getElementById("copyButton");
+
+        let timestamp = inputBox.value * 1000; 
+        let date = new Date(timestamp);
+        console.log(date.toUTCString());
+
+        outputBox.value = (date.toUCString());
 
 
         /* ========================================
