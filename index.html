@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Small Text Converter</title>
-    <button id="copyButton">COPY</button>
-    
+
     <style>
         html,
         body {
@@ -60,6 +59,16 @@
         #outputBox:focus {
             outline: none;
         }
+
+        #copyButton {
+            width: 100px;
+
+            padding: 10px;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -79,6 +88,10 @@
             placeholder="Small caps will appear here..."
         ></textarea>
 
+        <button id="copyButton">
+            COPY
+        </button>
+
     </div>
 
 
@@ -89,6 +102,9 @@
 
         const outputBox =
             document.getElementById("outputBox");
+
+        const copyButton =
+            document.getElementById("copyButton");
 
 
         function smallCaps(text) {
@@ -149,18 +165,21 @@
                     smallCaps(inputBox.value);
 
             }
+        );
 
 
-            let copyButton = document.getElementById("copyButton");
-        
-            copyButton.addEventListener("click", function() {
-        
-                navigator.clipboard.writeText("Hello!");
-        
+        copyButton.addEventListener(
+            "click",
+            function() {
+
+                navigator.clipboard.writeText(
+                    outputBox.value
+                );
+
                 console.log("Copied!");
-    
-        });
 
+            }
+        );
 
     </script>
 
