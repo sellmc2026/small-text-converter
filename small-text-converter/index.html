@@ -6,13 +6,7 @@
 
     <link rel="icon" type="image/png" href="../favicon.png">
 
-    <img
-        id="logo"
-        src="/utilitease/logo.png"
-        alt="Logo"
-    >
-
-    <title>Small Text Converter | UtilitEase</title>
+    <title>UtilitEase</title>
 
     <style>
 
@@ -86,6 +80,8 @@
 
             cursor: pointer;
 
+            text-decoration: none;
+
             transition: color 0.2s ease;
         }
 
@@ -121,21 +117,32 @@
 
 
         /* ========================================
-           CONVERTER
+           INPUT / OUTPUT
            ======================================== */
 
         #container {
             display: flex;
+
             flex-direction: column;
 
             gap: 15px;
 
-            width: 600px;
+            width: 900px;
+        }
+
+        #textBoxes {
+            display: flex;
+
+            gap: 15px;
+
+            width: 100%;
         }
 
         #inputBox,
         #outputBox {
-            width: 100%;
+            width: 50%;
+            height: 50px;
+
             box-sizing: border-box;
 
             padding: 12px;
@@ -148,20 +155,15 @@
 
             background-color: #222222;
             color: #ffffff;
-        }
 
-        #inputBox {
-            height: 50px;
+            resize: none;
         }
 
         #outputBox {
-            height: 150px;
-
-            resize: none;
-
             cursor: text;
         }
 
+        #inputBox:focus,
         #outputBox:focus {
             outline: none;
         }
@@ -172,7 +174,7 @@
            ======================================== */
 
         #copyButton {
-            width: 600px;
+            width: 100%;
 
             box-sizing: border-box;
 
@@ -188,27 +190,6 @@
 
             border: 2px solid #ffffff;
             border-radius: 8px;
-
-            transition:
-                background-color 0.3s ease,
-                color 0.3s ease,
-                opacity 0.3s ease;
-        }
-
-        /* Empty / inactive state */
-
-        #copyButton.inactive {
-            background-color: #444444;
-            color: #aaaaaa;
-            opacity: 0.75;
-        }
-
-        /* Has text / active state */
-
-        #copyButton.active {
-            background-color: #ffffff;
-            color: #000000;
-            opacity: 1;
         }
 
 
@@ -268,7 +249,6 @@
 
 <body>
 
-
     <!-- ========================================
          HEADER
          ======================================== -->
@@ -277,30 +257,37 @@
 
         <img
             id="logo"
-            src="logo.png"
+            src="../logo.png"
             alt="Logo"
         >
 
         <h1 id="title">
-            Small Text Converter
+            UtilitEase
         </h1>
 
 
-        <!-- NAVIGATION -->
-
         <nav id="navigation">
 
-            <button class="navButton">
+            <a
+                href="../small-text-converter/"
+                class="navButton"
+            >
                 Small Text Converter
-            </button>
+            </a>
 
-            <button class="navButton">
+            <a
+                href="../unicodes/"
+                class="navButton"
+            >
                 Unicodes
-            </button>
+            </a>
 
-            <button class="navButton">
+            <a
+                href="../timestamp-converter/"
+                class="navButton"
+            >
                 Timestamp Converter
-            </button>
+            </a>
 
         </nav>
 
@@ -318,22 +305,23 @@
 
         <div id="container">
 
-            <input
-                type="text"
-                id="inputBox"
-                placeholder="Type something..."
-            >
+            <div id="textBoxes">
 
-            <textarea
-                id="outputBox"
-                readonly
-                placeholder="Small caps will appear here..."
-            ></textarea>
+                <textarea
+                    id="inputBox"
+                    placeholder="Input..."
+                ></textarea>
 
-            <button
-                id="copyButton"
-                class="inactive"
-            >
+                <textarea
+                    id="outputBox"
+                    readonly
+                    placeholder="Output..."
+                ></textarea>
+
+            </div>
+
+
+            <button id="copyButton">
                 COPY
             </button>
 
@@ -386,159 +374,38 @@
 
 
         /* ========================================
-           SMALL CAPS
-           ======================================== */
-
-        function smallCaps(text) {
-
-            const smallCaps = {
-                A: "ᴀ",
-                B: "ʙ",
-                C: "ᴄ",
-                D: "ᴅ",
-                E: "ᴇ",
-                F: "ꜰ",
-                G: "ɢ",
-                H: "ʜ",
-                I: "ɪ",
-                J: "ᴊ",
-                K: "ᴋ",
-                L: "ʟ",
-                M: "ᴍ",
-                N: "ɴ",
-                O: "ᴏ",
-                P: "ᴘ",
-                Q: "ǫ",
-                R: "ʀ",
-                S: "s",
-                T: "ᴛ",
-                U: "ᴜ",
-                V: "ᴠ",
-                W: "ᴡ",
-                X: "x",
-                Y: "ʏ",
-                Z: "ᴢ"
-            };
-
-
-            return text
-                .split("")
-                .map(function(character) {
-
-                    const upper =
-                        character.toUpperCase();
-
-                    if (smallCaps[upper]) {
-
-                        return smallCaps[upper];
-
-                    }
-
-                    return character;
-
-                })
-                .join("");
-        }
-
-
-        /* ========================================
-           LIVE CONVERSION
-           ======================================== */
-
-        inputBox.addEventListener(
-            "input",
-            function() {
-
-                outputBox.value =
-                    smallCaps(
-                        inputBox.value
-                    );
-
-
-                /*
-                 * Change the COPY button
-                 * depending on whether there
-                 * is text in the input.
-                 */
-
-                if (inputBox.value.length > 0) {
-
-                    copyButton.classList.remove(
-                        "inactive"
-                    );
-
-                    copyButton.classList.add(
-                        "active"
-                    );
-
-                } else {
-
-                    copyButton.classList.remove(
-                        "active"
-                    );
-
-                    copyButton.classList.add(
-                        "inactive"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* ========================================
            COPY
            ======================================== */
-
-        const delay =
-            ms =>
-            new Promise(
-                resolve =>
-                setTimeout(resolve, ms)
-            );
-
 
         copyButton.addEventListener(
             "click",
             async function() {
 
-                /*
-                 * Don't copy anything if
-                 * the input is empty.
-                 */
-
                 if (outputBox.value.length === 0) {
                     return;
                 }
-
 
                 await navigator.clipboard.writeText(
                     outputBox.value
                 );
 
-
-                console.log(
-                    "Copied text to user's clipboard"
-                );
-
-
                 copyButton.textContent =
                     "COPIED!";
 
+                setTimeout(
+                    function() {
 
-                await delay(1000);
+                        copyButton.textContent =
+                            "COPY";
 
-
-                copyButton.textContent =
-                    "COPY";
+                    },
+                    1000
+                );
 
             }
         );
 
     </script>
 
-</body>
-</html>
 </body>
 </html>
