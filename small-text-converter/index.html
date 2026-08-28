@@ -6,7 +6,7 @@
 
     <link rel="icon" type="image/png" href="../favicon.png">
 
-    <title>UtilitEase</title>
+    <title>Small Text Converter | UtilitEase</title>
 
     <style>
 
@@ -117,18 +117,18 @@
 
 
         /* ========================================
-           INPUT / OUTPUT
+           CONVERTER
            ======================================== */
 
         #container {
             display: flex;
-
             flex-direction: column;
 
             gap: 15px;
 
             width: 900px;
         }
+
 
         #textBoxes {
             display: flex;
@@ -138,10 +138,11 @@
             width: 100%;
         }
 
+
         #inputBox,
         #outputBox {
             width: 50%;
-            height: 50px;
+            height: 250px;
 
             box-sizing: border-box;
 
@@ -159,9 +160,6 @@
             resize: none;
         }
 
-        #outputBox {
-            cursor: text;
-        }
 
         #inputBox:focus,
         #outputBox:focus {
@@ -190,6 +188,29 @@
 
             border: 2px solid #ffffff;
             border-radius: 8px;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+
+        /* Empty / inactive state */
+
+        #copyButton.inactive {
+            background-color: #444444;
+            color: #aaaaaa;
+            opacity: 0.75;
+        }
+
+
+        /* Has text / active state */
+
+        #copyButton.active {
+            background-color: #ffffff;
+            color: #000000;
+            opacity: 1;
         }
 
 
@@ -221,6 +242,7 @@
             background-color: #151515;
         }
 
+
         #discordButton {
             padding: 8px 14px;
 
@@ -235,9 +257,11 @@
             cursor: pointer;
         }
 
+
         #minecraftText {
             font-size: 16px;
         }
+
 
         #minecraftIP {
             color: #00ff00;
@@ -248,6 +272,7 @@
 
 
 <body>
+
 
     <!-- ========================================
          HEADER
@@ -262,9 +287,11 @@
         >
 
         <h1 id="title">
-            UtilitEase
+            Small Text Converter
         </h1>
 
+
+        <!-- NAVIGATION -->
 
         <nav id="navigation">
 
@@ -309,19 +336,22 @@
 
                 <textarea
                     id="inputBox"
-                    placeholder="Input..."
+                    placeholder="Type something..."
                 ></textarea>
 
                 <textarea
                     id="outputBox"
                     readonly
-                    placeholder="Output..."
+                    placeholder="Small caps will appear here..."
                 ></textarea>
 
             </div>
 
 
-            <button id="copyButton">
+            <button
+                id="copyButton"
+                class="inactive"
+            >
                 COPY
             </button>
 
@@ -374,8 +404,115 @@
 
 
         /* ========================================
+           SMALL CAPS
+           ======================================== */
+
+        function smallCaps(text) {
+
+            const smallCaps = {
+                A: "ᴀ",
+                B: "ʙ",
+                C: "ᴄ",
+                D: "ᴅ",
+                E: "ᴇ",
+                F: "ꜰ",
+                G: "ɢ",
+                H: "ʜ",
+                I: "ɪ",
+                J: "ᴊ",
+                K: "ᴋ",
+                L: "ʟ",
+                M: "ᴍ",
+                N: "ɴ",
+                O: "ᴏ",
+                P: "ᴘ",
+                Q: "ǫ",
+                R: "ʀ",
+                S: "s",
+                T: "ᴛ",
+                U: "ᴜ",
+                V: "ᴠ",
+                W: "ᴡ",
+                X: "x",
+                Y: "ʏ",
+                Z: "ᴢ"
+            };
+
+
+            return text
+
+                .split("")
+
+                .map(function(character) {
+
+                    const upper =
+                        character.toUpperCase();
+
+                    if (smallCaps[upper]) {
+
+                        return smallCaps[upper];
+
+                    }
+
+                    return character;
+
+                })
+
+                .join("");
+        }
+
+
+        /* ========================================
+           LIVE CONVERSION
+           ======================================== */
+
+        inputBox.addEventListener(
+            "input",
+            function() {
+
+                outputBox.value =
+                    smallCaps(
+                        inputBox.value
+                    );
+
+
+                if (inputBox.value.length > 0) {
+
+                    copyButton.classList.remove(
+                        "inactive"
+                    );
+
+                    copyButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    copyButton.classList.remove(
+                        "active"
+                    );
+
+                    copyButton.classList.add(
+                        "inactive"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
            COPY
            ======================================== */
+
+        const delay =
+            ms =>
+            new Promise(
+                resolve =>
+                setTimeout(resolve, ms)
+            );
+
 
         copyButton.addEventListener(
             "click",
@@ -385,22 +522,26 @@
                     return;
                 }
 
+
                 await navigator.clipboard.writeText(
                     outputBox.value
                 );
 
+
+                console.log(
+                    "Copied text to user's clipboard"
+                );
+
+
                 copyButton.textContent =
                     "COPIED!";
 
-                setTimeout(
-                    function() {
 
-                        copyButton.textContent =
-                            "COPY";
+                await delay(1000);
 
-                    },
-                    1000
-                );
+
+                copyButton.textContent =
+                    "COPY";
 
             }
         );
