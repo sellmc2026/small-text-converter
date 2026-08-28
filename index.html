@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <img src="assets/logo.png" alt="Website Logo" width="150">
+
     <link rel="icon" type="image/png" href="favicon.png">
-
-
 
     <title>Small Text Converter | Utilitease</title>
 
@@ -81,6 +79,8 @@
             font-size: 18px;
 
             cursor: pointer;
+
+            transition: color 0.2s ease;
         }
 
         .navButton:hover {
@@ -168,13 +168,41 @@
         #copyButton {
             width: 600px;
 
+            box-sizing: border-box;
+
             padding: 10px;
 
             font-size: 16px;
+            font-weight: bold;
 
             cursor: pointer;
 
-            flex: center;
+            background-color: #666666;
+            color: #ffffff;
+
+            border: 2px solid #ffffff;
+            border-radius: 8px;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        /* Empty / inactive state */
+
+        #copyButton.inactive {
+            background-color: #444444;
+            color: #aaaaaa;
+            opacity: 0.75;
+        }
+
+        /* Has text / active state */
+
+        #copyButton.active {
+            background-color: #ffffff;
+            color: #000000;
+            opacity: 1;
         }
 
 
@@ -243,7 +271,7 @@
 
         <img
             id="logo"
-            src="logo.png"
+            src="assets/logo.png"
             alt="Logo"
         >
 
@@ -296,7 +324,10 @@
                 placeholder="Small caps will appear here..."
             ></textarea>
 
-            <button id="copyButton">
+            <button
+                id="copyButton"
+                class="inactive"
+            >
                 COPY
             </button>
 
@@ -385,9 +416,7 @@
 
 
             return text
-
                 .split("")
-
                 .map(function(character) {
 
                     const upper =
@@ -402,7 +431,6 @@
                     return character;
 
                 })
-
                 .join("");
         }
 
@@ -419,6 +447,35 @@
                     smallCaps(
                         inputBox.value
                     );
+
+
+                /*
+                 * Change the COPY button
+                 * depending on whether there
+                 * is text in the input.
+                 */
+
+                if (inputBox.value.length > 0) {
+
+                    copyButton.classList.remove(
+                        "inactive"
+                    );
+
+                    copyButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    copyButton.classList.remove(
+                        "active"
+                    );
+
+                    copyButton.classList.add(
+                        "inactive"
+                    );
+
+                }
 
             }
         );
@@ -438,9 +495,17 @@
 
         copyButton.addEventListener(
             "click",
-            if outputBox.value =< 0 {
-                stop.()
             async function() {
+
+                /*
+                 * Don't copy anything if
+                 * the input is empty.
+                 */
+
+                if (outputBox.value.length === 0) {
+                    return;
+                }
+
 
                 await navigator.clipboard.writeText(
                     outputBox.value
@@ -469,4 +534,3 @@
 
 </body>
 </html>
-
