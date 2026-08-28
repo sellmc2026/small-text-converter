@@ -1895,4 +1895,6 @@ export const EMOJI_LIST = [
   { character: "🫶", name: "Heart Hands" },
   { character: "🫷", name: "Leftwards Pushing Hand" },
   { character: "🫸", name: "Rightwards Pushing Hand" },
+  { character: "😭", name: "Sob" },
+  { character: "😢", name: "Sob" },
 ];
