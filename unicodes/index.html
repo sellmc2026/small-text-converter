@@ -472,52 +472,16 @@
          JAVASCRIPT
          ======================================== -->
 
-    <script>
+    <script type="module">
 
 
         /* ========================================
-           ADD YOUR UNICODES HERE
+           UNICODES (loaded from external file)
            ======================================== */
 
-        const unicodes = [
+        import { EMOJI_LIST } from "./emojis.js";
 
-            { character: "★", name: "Black Star" },
-            { character: "☆", name: "White Star" },
-            { character: "♥", name: "Heart" },
-            { character: "♡", name: "White Heart" },
-            { character: "♦", name: "Diamond" },
-
-            { character: "♠", name: "Spade" },
-            { character: "♣", name: "Club" },
-            { character: "☀", name: "Sun" },
-            { character: "☁", name: "Cloud" },
-            { character: "☂", name: "Umbrella" },
-
-            { character: "✓", name: "Check Mark" },
-            { character: "✗", name: "Cross Mark" },
-            { character: "→", name: "Right Arrow" },
-            { character: "←", name: "Left Arrow" },
-            { character: "↑", name: "Up Arrow" },
-
-            { character: "↓", name: "Down Arrow" },
-            { character: "∞", name: "Infinity" },
-            { character: "≈", name: "Approximately Equal" },
-            { character: "≠", name: "Not Equal" },
-            { character: "±", name: "Plus Minus" },
-
-            { character: "×", name: "Multiplication" },
-            { character: "÷", name: "Division" },
-            { character: "√", name: "Square Root" },
-            { character: "π", name: "Pi" },
-            { character: "°", name: "Degree" },
-
-            { character: "©", name: "Copyright" },
-            { character: "®", name: "Registered" },
-            { character: "™", name: "Trademark" },
-            { character: "§", name: "Section" },
-            { character: "¶", name: "Paragraph" }
-
-        ];
+        const unicodes = EMOJI_LIST;
 
 
         /* ========================================
