@@ -6,7 +6,7 @@
 
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <title>Small Text Converter | UtilitEase</title>
+    <title>UtilitEase | Simple Online Utilities</title>
 
     <style>
 
@@ -49,9 +49,18 @@
 
         #title {
             margin-top: 10px;
+            margin-bottom: 10px;
+
+            font-size: 36px;
+        }
+
+        #subtitle {
+            margin-top: 0;
             margin-bottom: 25px;
 
-            font-size: 32px;
+            color: #aaaaaa;
+
+            font-size: 18px;
         }
 
 
@@ -80,7 +89,10 @@
 
             cursor: pointer;
 
-            transition: color 0.2s ease;
+            text-decoration: none;
+
+            transition:
+                color 0.2s ease;
         }
 
         .navButton:hover {
@@ -115,94 +127,80 @@
 
 
         /* ========================================
-           CONVERTER
+           TOOL GRID
            ======================================== */
 
-        #container {
-            display: flex;
-            flex-direction: column;
+        #tools {
+            display: grid;
 
-            gap: 15px;
+            grid-template-columns:
+                repeat(3, 1fr);
 
-            width: 600px;
-        }
+            gap: 20px;
 
-        #inputBox,
-        #outputBox {
-            width: 100%;
-            box-sizing: border-box;
-
-            padding: 12px;
-
-            font-size: 20px;
-            font-family: Arial, sans-serif;
-
-            border: 2px solid #555555;
-            border-radius: 8px;
-
-            background-color: #222222;
-            color: #ffffff;
-        }
-
-        #inputBox {
-            height: 50px;
-        }
-
-        #outputBox {
-            height: 150px;
-
-            resize: none;
-
-            cursor: text;
-        }
-
-        #outputBox:focus {
-            outline: none;
+            width: 900px;
+            max-width: 90%;
         }
 
 
         /* ========================================
-           COPY BUTTON
+           TOOL CARDS
            ======================================== */
 
-        #copyButton {
-            width: 600px;
+        .tool {
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            min-height: 200px;
+
+            padding: 25px;
 
             box-sizing: border-box;
 
-            padding: 10px;
+            background-color: #1b1b1b;
 
-            font-size: 16px;
-            font-weight: bold;
+            border: 2px solid #333333;
 
-            cursor: pointer;
+            border-radius: 10px;
 
-            background-color: #666666;
             color: #ffffff;
 
-            border: 2px solid #ffffff;
-            border-radius: 8px;
+            text-decoration: none;
 
             transition:
-                background-color 0.3s ease,
-                color 0.3s ease,
-                opacity 0.3s ease;
+                background-color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
         }
 
-        /* Empty / inactive state */
+        .tool:hover {
+            background-color: #222222;
 
-        #copyButton.inactive {
-            background-color: #444444;
+            border-color: #00ff00;
+
+            transform: translateY(-4px);
+        }
+
+
+        .toolTitle {
+            margin: 0 0 10px 0;
+
+            font-size: 24px;
+        }
+
+
+        .toolDescription {
+            margin: 0;
+
             color: #aaaaaa;
-            opacity: 0.75;
-        }
 
-        /* Has text / active state */
+            font-size: 16px;
 
-        #copyButton.active {
-            background-color: #ffffff;
-            color: #000000;
-            opacity: 1;
+            text-align: center;
         }
 
 
@@ -234,6 +232,7 @@
             background-color: #151515;
         }
 
+
         #discordButton {
             padding: 8px 14px;
 
@@ -248,9 +247,11 @@
             cursor: pointer;
         }
 
+
         #minecraftText {
             font-size: 16px;
         }
+
 
         #minecraftIP {
             color: #00ff00;
@@ -272,29 +273,42 @@
         <img
             id="logo"
             src="logo.png"
-            alt="Logo"
+            alt="UtilitEase Logo"
         >
 
         <h1 id="title">
-            Small Text Converter
+            UtilitEase
         </h1>
+
+        <p id="subtitle">
+            Simple tools. No nonsense.
+        </p>
 
 
         <!-- NAVIGATION -->
 
         <nav id="navigation">
 
-            <button class="navButton">
+            <a
+                href="/small-text/"
+                class="navButton"
+            >
                 Small Text Converter
-            </button>
+            </a>
 
-            <button class="navButton">
+            <a
+                href="/unicodes/"
+                class="navButton"
+            >
                 Unicodes
-            </button>
+            </a>
 
-            <button class="navButton">
+            <a
+                href="/timestamp/"
+                class="navButton"
+            >
                 Timestamp Converter
-            </button>
+            </a>
 
         </nav>
 
@@ -310,26 +324,62 @@
 
     <main id="main">
 
-        <div id="container">
+        <div id="tools">
 
-            <input
-                type="text"
-                id="inputBox"
-                placeholder="Type something..."
+
+            <!-- SMALL TEXT -->
+
+            <a
+                href="/small-text/"
+                class="tool"
             >
 
-            <textarea
-                id="outputBox"
-                readonly
-                placeholder="Small caps will appear here..."
-            ></textarea>
+                <h2 class="toolTitle">
+                    Small Text
+                </h2>
 
-            <button
-                id="copyButton"
-                class="inactive"
+                <p class="toolDescription">
+                    Convert normal text into small Unicode text.
+                </p>
+
+            </a>
+
+
+            <!-- UNICODES -->
+
+            <a
+                href="/unicodes/"
+                class="tool"
             >
-                COPY
-            </button>
+
+                <h2 class="toolTitle">
+                    Unicodes
+                </h2>
+
+                <p class="toolDescription">
+                    Find and copy useful Unicode characters.
+                </p>
+
+            </a>
+
+
+            <!-- TIMESTAMP -->
+
+            <a
+                href="/timestamp/"
+                class="tool"
+            >
+
+                <h2 class="toolTitle">
+                    Timestamp Converter
+                </h2>
+
+                <p class="toolDescription">
+                    Convert dates and times into timestamps.
+                </p>
+
+            </a>
+
 
         </div>
 
@@ -369,170 +419,22 @@
 
     <script>
 
-        const inputBox =
-            document.getElementById("inputBox");
-
-        const outputBox =
-            document.getElementById("outputBox");
-
-        const copyButton =
-            document.getElementById("copyButton");
+        const discordButton =
+            document.getElementById("discordButton");
 
 
-        /* ========================================
-           SMALL CAPS
-           ======================================== */
-
-        function smallCaps(text) {
-
-            const smallCaps = {
-                A: "ᴀ",
-                B: "ʙ",
-                C: "ᴄ",
-                D: "ᴅ",
-                E: "ᴇ",
-                F: "ꜰ",
-                G: "ɢ",
-                H: "ʜ",
-                I: "ɪ",
-                J: "ᴊ",
-                K: "ᴋ",
-                L: "ʟ",
-                M: "ᴍ",
-                N: "ɴ",
-                O: "ᴏ",
-                P: "ᴘ",
-                Q: "ǫ",
-                R: "ʀ",
-                S: "s",
-                T: "ᴛ",
-                U: "ᴜ",
-                V: "ᴠ",
-                W: "ᴡ",
-                X: "x",
-                Y: "ʏ",
-                Z: "ᴢ"
-            };
-
-
-            return text
-                .split("")
-                .map(function(character) {
-
-                    const upper =
-                        character.toUpperCase();
-
-                    if (smallCaps[upper]) {
-
-                        return smallCaps[upper];
-
-                    }
-
-                    return character;
-
-                })
-                .join("");
-        }
-
-
-        /* ========================================
-           LIVE CONVERSION
-           ======================================== */
-
-        inputBox.addEventListener(
-            "input",
+        discordButton.addEventListener(
+            "click",
             function() {
 
-                outputBox.value =
-                    smallCaps(
-                        inputBox.value
-                    );
-
-
-                /*
-                 * Change the COPY button
-                 * depending on whether there
-                 * is text in the input.
-                 */
-
-                if (inputBox.value.length > 0) {
-
-                    copyButton.classList.remove(
-                        "inactive"
-                    );
-
-                    copyButton.classList.add(
-                        "active"
-                    );
-
-                } else {
-
-                    copyButton.classList.remove(
-                        "active"
-                    );
-
-                    copyButton.classList.add(
-                        "inactive"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* ========================================
-           COPY
-           ======================================== */
-
-        const delay =
-            ms =>
-            new Promise(
-                resolve =>
-                setTimeout(resolve, ms)
-            );
-
-
-        copyButton.addEventListener(
-            "click",
-            async function() {
-
-                /*
-                 * Don't copy anything if
-                 * the input is empty.
-                 */
-
-                if (outputBox.value.length === 0) {
-                    return;
-                }
-
-
-                await navigator.clipboard.writeText(
-                    outputBox.value
-                );
-
-
                 console.log(
-                    "Copied text to user's clipboard"
+                    "Discord button clicked."
                 );
-
-
-                copyButton.textContent =
-                    "COPIED!";
-
-
-                await delay(1000);
-
-
-                copyButton.textContent =
-                    "COPY";
 
             }
         );
 
     </script>
 
-</body>
-</html>
 </body>
 </html>
