@@ -174,17 +174,20 @@
 
         copyButton.addEventListener(
             "click",
-            asynce function() {
-
+            async function() {
+        
                 navigator.clipboard.writeText(
                     outputBox.value
                 );
-                
+        
                 console.log("copied text to user's clipboard");
+        
                 cpybtn.textContent = "Copied!";
+        
                 await delay(1000);
+        
                 cpybtn.textContent = "Copy";
-
+        
             }
         );
 
