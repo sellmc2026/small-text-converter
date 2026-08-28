@@ -366,49 +366,56 @@
         
         const inputBox =
             document.getElementById("inputBox");
-
+        
         const outputBox =
             document.getElementById("outputBox");
-
+        
         const copyButton =
             document.getElementById("copyButton");
-
-        let timestamp = inputBox.value * 1000; 
-        let date = new Date(timestamp);
-        console.log(date.toUTCString());
-
-        outputBox.value = (date.toUCString());
-
-
-        /* ========================================
-           COPY
-           ======================================== */
-
+        
+        
+        inputBox.addEventListener(
+            "input",
+            function() {
+        
+                let timestamp =
+                    inputBox.value * 1000;
+        
+                let date =
+                    new Date(timestamp);
+        
+                outputBox.value =
+                    date.toUTCString();
+        
+            }
+        );
+        
+        
         copyButton.addEventListener(
             "click",
             async function() {
-
+        
                 if (outputBox.value.length === 0) {
                     return;
                 }
-
+        
                 await navigator.clipboard.writeText(
                     outputBox.value
                 );
-
+        
                 copyButton.textContent =
                     "COPIED!";
-
+        
                 setTimeout(
                     function() {
-
+        
                         copyButton.textContent =
                             "COPY";
-
+        
                     },
                     1000
                 );
-
+        
             }
         );
 
