@@ -438,6 +438,8 @@
 
         copyButton.addEventListener(
             "click",
+            if outputBox.value =< 0 {
+                stop.()
             async function() {
 
                 await navigator.clipboard.writeText(
