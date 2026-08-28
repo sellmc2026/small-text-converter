@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Small Text Converter</title>
-
+    <button id="copyButton">COPY</button>
+    
     <style>
         html,
         body {
@@ -148,7 +149,18 @@
                     smallCaps(inputBox.value);
 
             }
-        );
+
+
+        let copyButton = document.getElementById("copyButton");
+    
+        copyButton.addEventListener("click", function() {
+    
+            navigator.clipboard.writeText("Hello!");
+    
+            console.log("Copied!");
+    
+        });
+
 
     </script>
 
