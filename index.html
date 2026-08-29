@@ -9,12 +9,14 @@
     <title>UtilitEase | Simple Online Utilities</title>
 
     <style>
-/*lol. */
+
+        /*lol. */
+
         .toolIcon,
         .unicodeIcon {
             font-size: 50px;
         }
-        
+
         .toolImage {
             width: 50px;
             height: 50px;
@@ -199,9 +201,10 @@
 
             font-size: 24px;
         }
-        
+
         .smallTextTitle,
-        .timestampTitle {
+        .timestampTitle,
+        .wordScramblerTitle {
             font-size: 20px;
         }
 
@@ -259,17 +262,19 @@
 
             cursor: pointer;
         }
-        
+
         #discordButton:hover {
             background-color: #ffffff;
             color: #5865F2;
-            box-shadow: 0 0 15px #5865F2
+
+            box-shadow: 0 0 15px #5865F2;
         }
-        
+
         #discordButton:active {
             background-color: #5865F2;
             color: #ffffff;
-            box-shadow: 0 0 15px #FFA3F9
+
+            box-shadow: 0 0 15px #FFA3F9;
         }
 
 
@@ -359,7 +364,12 @@
                 class="tool"
             >
 
-                <img src="../utilitease/stcIcon.png" alt="small-text-converter" class="toolImage">
+                <img
+                    src="stcIcon.png"
+                    alt="Small Text Converter"
+                    class="toolImage"
+                >
+
                 <h2 class="smallTextTitle">
                     Small Text Converter
                 </h2>
@@ -377,32 +387,61 @@
                 href="/utilitease/unicodes/"
                 class="tool"
             >
-                <div class="unicodeIcon">🙂</div>
-            
+
+                <div class="unicodeIcon">
+                    🙂
+                </div>
+
                 <h2 class="unicodesTitle">
                     Unicodes
                 </h2>
-            
+
                 <p class="toolDescription">
                     Find and copy Unicode characters
                 </p>
+
             </a>
 
 
             <!-- TIMESTAMP -->
 
             <a
-                href="/utilitease/timestamp/"
+                href="/utilitease/timestamp-converter/"
                 class="tool"
             >
 
-                <div class="toolIcon">📅</div>
+                <div class="toolIcon">
+                    📅
+                </div>
+
                 <h2 class="timestampTitle">
                     Timestamp Converter
                 </h2>
 
                 <p class="toolDescription">
                     Convert timestamps into Dates and Times
+                </p>
+
+            </a>
+
+
+            <!-- WORD SCRAMBLER -->
+
+            <a
+                href="/utilitease/word-scrambler/"
+                class="tool"
+            >
+
+                <div class="toolIcon">
+                    🔀
+                </div>
+
+                <h2 class="wordScramblerTitle">
+                    Word Scrambler
+                </h2>
+
+                <p class="toolDescription">
+                    Scramble words and letters
                 </p>
 
             </a>
