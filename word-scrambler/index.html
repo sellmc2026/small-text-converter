@@ -206,6 +206,39 @@
             opacity: 1;
         }
 
+        #generateButton {
+            width: 30%;
+
+            box-sizing: border-box;
+
+            padding: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            background-color: #BEFF8F;
+            color: #000000;
+
+            border: 2px solid #000000;
+            border-radius: 8px;
+
+            opacity: 0.75;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+        #copyButton.active {
+            background-color: #8FFF3D;
+            color: #ffffff;
+
+            opacity: 1;
+        }
+
 
         /* ========================================
            BOTTOM LINE
@@ -356,6 +389,10 @@
 
             <button id="copyButton">
                 COPY
+            </button>
+
+            <button id="generateButton">
+                GENERATE
             </button>
 
         </div>
