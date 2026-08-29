@@ -125,14 +125,24 @@
 
             flex-direction: column;
 
+            align-items: center;
+
             gap: 15px;
 
             width: 900px;
         }
 
 
+        /* ========================================
+           TEXT BOXES
+           ======================================== */
+
         #textBoxes {
             display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
 
             gap: 15px;
 
@@ -142,8 +152,8 @@
 
         #inputBox,
         #outputBox {
-            width: 50%;
-            height: 250px;
+            width: 600px;
+            height: 200px;
 
             box-sizing: border-box;
 
@@ -169,11 +179,47 @@
 
 
         /* ========================================
+           GENERATE BUTTON
+           ======================================== */
+
+        #generateButton {
+            width: 300px;
+
+            box-sizing: border-box;
+
+            padding: 10px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            background-color: #BEFF8F;
+            color: #000000;
+
+            border: 2px solid #000000;
+            border-radius: 8px;
+
+            opacity: 0.75;
+
+            transition:
+                background-color 0.3s ease,
+                color 0.3s ease,
+                opacity 0.3s ease;
+        }
+
+
+        #generateButton:hover {
+            opacity: 1;
+        }
+
+
+        /* ========================================
            COPY BUTTON
            ======================================== */
 
         #copyButton {
-            width: 100%;
+            width: 150px;
 
             box-sizing: border-box;
 
@@ -198,39 +244,6 @@
                 opacity 0.3s ease;
         }
 
-
-        #copyButton.active {
-            background-color: #ffffff;
-            color: #000000;
-
-            opacity: 1;
-        }
-
-        #generateButton {
-            width: 30%;
-
-            box-sizing: border-box;
-
-            padding: 10px;
-
-            font-size: 16px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            background-color: #BEFF8F;
-            color: #000000;
-
-            border: 2px solid #000000;
-            border-radius: 8px;
-
-            opacity: 0.75;
-
-            transition:
-                background-color 0.3s ease,
-                color 0.3s ease,
-                opacity 0.3s ease;
-        }
 
         #copyButton.active {
             background-color: #8FFF3D;
@@ -355,6 +368,13 @@
                 Timestamp Converter
             </a>
 
+            <a
+                href="../word-scrambler/"
+                class="navButton"
+            >
+                Word Scrambler
+            </a>
+
         </nav>
 
     </header>
@@ -371,6 +391,16 @@
 
         <div id="container">
 
+
+            <!-- GENERATE BUTTON -->
+
+            <button id="generateButton">
+                GENERATE
+            </button>
+
+
+            <!-- TEXT BOXES -->
+
             <div id="textBoxes">
 
                 <textarea
@@ -381,19 +411,18 @@
                 <textarea
                     id="outputBox"
                     readonly
-                    placeholder="Small caps will appear here..."
+                    placeholder="Scrambled text will appear here..."
                 ></textarea>
 
             </div>
 
 
+            <!-- COPY BUTTON -->
+
             <button id="copyButton">
                 COPY
             </button>
 
-            <button id="generateButton">
-                GENERATE
-            </button>
 
         </div>
 
@@ -442,40 +471,79 @@
         const copyButton =
             document.getElementById("copyButton");
 
+        const generateButton =
+            document.getElementById("generateButton");
+
 
         /* ========================================
            WORD SCRAMBLER
            ======================================== */
 
         function scrambleText(text) {
-          // Convert string to an array of characters
-          let chars = text.split("");
-          
-          // Fisher-Yates Shuffle Algorithm
-          for (let i = chars.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [chars[i], chars[j]] = [chars[j], chars[i]]; // Swap elements
-          }
-            
+
+            let chars = text.split("");
+
+
+            /* Fisher-Yates Shuffle */
+
+            for (let i = chars.length - 1; i > 0; i--) {
+
+                const j =
+                    Math.floor(Math.random() * (i + 1));
+
+                [chars[i], chars[j]] =
+                    [chars[j], chars[i]];
+
+            }
+
+
+            return chars.join("");
+
+        }
+
+
         /* ========================================
-           LIVE CONVERSION
+           GENERATE
+           ======================================== */
+
+        generateButton.addEventListener(
+            "click",
+            function() {
+
+                if (inputBox.value.length === 0) {
+                    return;
+                }
+
+
+                outputBox.value =
+                    scrambleText(inputBox.value);
+
+
+                copyButton.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+
+        /* ========================================
+           INPUT
            ======================================== */
 
         inputBox.addEventListener(
             "input",
             function() {
 
-                outputBox.value =
-                    scrambleText(inputBox.value);
-
-
                 if (inputBox.value.length > 0) {
 
-                    copyButton.classList.add(
+                    copyButton.classList.remove(
                         "active"
                     );
 
                 } else {
+
+                    outputBox.value = "";
 
                     copyButton.classList.remove(
                         "active"
