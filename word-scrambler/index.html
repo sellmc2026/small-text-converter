@@ -122,6 +122,7 @@
 
         #container {
             display: flex;
+
             flex-direction: column;
 
             gap: 15px;
@@ -183,11 +184,13 @@
 
             cursor: pointer;
 
-            background-color: #666666;
-            color: #ffffff;
+            background-color: #444444;
+            color: #aaaaaa;
 
             border: 2px solid #ffffff;
             border-radius: 8px;
+
+            opacity: 0.75;
 
             transition:
                 background-color 0.3s ease,
@@ -196,20 +199,10 @@
         }
 
 
-        /* Empty / inactive state */
-
-        #copyButton.inactive {
-            background-color: #444444;
-            color: #aaaaaa;
-            opacity: 0.75;
-        }
-
-
-        /* Has text / active state */
-
         #copyButton.active {
             background-color: #ffffff;
             color: #000000;
+
             opacity: 1;
         }
 
@@ -258,6 +251,14 @@
         }
 
 
+        #discordButton:hover {
+            background-color: #ffffff;
+            color: #5865F2;
+
+            box-shadow: 0 0 15px #5865F2;
+        }
+
+
         #minecraftText {
             font-size: 16px;
         }
@@ -285,3 +286,226 @@
             src="../logo.png"
             alt="Logo"
         >
+
+        <h1 id="title">
+            Small Text Converter
+        </h1>
+
+
+        <nav id="navigation">
+
+            <a
+                href="../"
+                class="navButton"
+            >
+                Home
+            </a>
+
+            <a
+                href="../small-text-converter/"
+                class="navButton"
+            >
+                Small Text Converter
+            </a>
+
+            <a
+                href="../unicodes/"
+                class="navButton"
+            >
+                Unicodes
+            </a>
+
+            <a
+                href="../timestamp-converter/"
+                class="navButton"
+            >
+                Timestamp Converter
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <div id="topLine"></div>
+
+
+    <!-- ========================================
+         MAIN CONTENT
+         ======================================== -->
+
+    <main id="main">
+
+        <div id="container">
+
+            <div id="textBoxes">
+
+                <textarea
+                    id="inputBox"
+                    placeholder="Input..."
+                ></textarea>
+
+                <textarea
+                    id="outputBox"
+                    readonly
+                    placeholder="Small caps will appear here..."
+                ></textarea>
+
+            </div>
+
+
+            <button id="copyButton">
+                COPY
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <div id="bottomLine"></div>
+
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer id="footer">
+
+        <button id="discordButton">
+            Discord
+        </button>
+
+        <div id="minecraftText">
+
+            Our Minecraft Server — SellMC!
+
+            <span id="minecraftIP">
+                <br>
+                sᴇʟʟᴍᴄ.ᴍɪɴᴇʜᴜᴛ.ɢɢ
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+
+    <script>
+
+        const inputBox =
+            document.getElementById("inputBox");
+
+        const outputBox =
+            document.getElementById("outputBox");
+
+        const copyButton =
+            document.getElementById("copyButton");
+
+
+        /* ========================================
+           WORD SCRAMBLER
+           ======================================== */
+
+        function scrambleText(text) {
+          // Convert string to an array of characters
+          let chars = text.split("");
+          
+          // Fisher-Yates Shuffle Algorithm
+          for (let i = chars.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [chars[i], chars[j]] = [chars[j], chars[i]]; // Swap elements
+          }
+            
+        /* ========================================
+           LIVE CONVERSION
+           ======================================== */
+
+        inputBox.addEventListener(
+            "input",
+            function() {
+
+                outputBox.value =
+                    scrambleText(inputBox.value);
+
+
+                if (inputBox.value.length > 0) {
+
+                    copyButton.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    copyButton.classList.remove(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ========================================
+           COPY
+           ======================================== */
+
+        copyButton.addEventListener(
+            "click",
+            async function() {
+
+                if (outputBox.value.length === 0) {
+                    return;
+                }
+
+
+                await navigator.clipboard.writeText(
+                    outputBox.value
+                );
+
+
+                copyButton.textContent =
+                    "COPIED!";
+
+
+                setTimeout(
+                    function() {
+
+                        copyButton.textContent =
+                            "COPY";
+
+                    },
+                    1000
+                );
+
+            }
+        );
+
+
+        /* ========================================
+           DISCORD
+           ======================================== */
+
+        const discordButton =
+            document.getElementById("discordButton");
+
+
+        discordButton.addEventListener(
+            "click",
+            function() {
+
+                console.log(
+                    "Discord button clicked."
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
